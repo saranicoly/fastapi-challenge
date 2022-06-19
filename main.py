@@ -16,7 +16,7 @@ class Item(BaseModel):
 
 @app.get("/")
 def read_root():
-  return {show_dict(grafo)}
+  return show_dict(grafo)
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):

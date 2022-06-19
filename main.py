@@ -1,30 +1,35 @@
 import json
-from typing import Union
 
 from fastapi import FastAPI
-from pydantic import BaseModel
 from grafo import Grafo
 
 app = FastAPI()
 
 grafo = Grafo()
 
-class Item(BaseModel):
-  name: str
-  price: float
-  is_offer: Union[bool, None] = None
-
 @app.get("/")
 def read_root():
   return show_dict(grafo)
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-  return {"item_id": item_id, "q": q}
+@app.get("/friends/{name}")
+def read_pessoa(name: str):
+  all_friends = []
+  for person, is_friend in grafo.matriz_adj[name].items():
+    if is_friend == 1 and person != name:
+      all_friends.append(person)
+  return all_friends
 
-@app.put("/items/{item_id}")
-def update_item(item_id: int, item: Item):
-  return {"item_name": item.name, "item_id": item_id}
+  # @app.get("/unknown_friends/{name}")
+  # def read_pessoa(name: str):
+  #   known_people = []
+  #   for known_person, is_knwon in grafo.matriz_adj[name].items():
+  #     if is_knwon == 1 and known_person != name:
+  #       known_people.append(known_person)
+  #   return known_people
+
+# @app.put("/items/{item_id}")
+# def update_item(item_id: int, item: Item):
+#   return {"item_name": item.name, "item_id": item_id}
 
 def show_dict(grafo):
   adj_list = list(grafo.matriz_adj.keys())

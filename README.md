@@ -6,7 +6,7 @@
 
 - Havia a possibilidade de usar Python, Java ou Node.js para o desafio. Eu escolhi Python por já ter familiaridade com a linguagem.
 - Feito isso, eu ponderei o que iria usar para o webservice. Dentre as opções principais estavam: Django, Flask e FastAPI.
-- Eu não tinha familiaridade com nenhum dos frameworks citados, então esse não foi um fator decisivo. Acabei decidindo por FastAPI por se tratar de um framework de mais fácil aprendizado e pelo fato de o desafio em si ser bastante simples. Caso existisse um cenário de complexidade maior, muito provavelmente eu usaria Django (por ser mais "robusto").
+- Eu não tinha familiaridade com nenhum dos frameworks citados, então esse não foi um fator decisivo. Acabei decidindo por FastAPI por se tratar de um framework de mais fácil aprendizado e pelo fato de o desafio em si ser bastante simples. Caso existisse um cenário de complexidade maior, muito provavelmente eu usaria Django (por ser mais "robusto") e visto que seria mais fácil utilizar o padrão MVC com o Django para criar um possível front-end.
 
 ### Decisões no decorrer do desenvolvimento
 
@@ -15,13 +15,14 @@
 - Dividi os diretórios da seguinte forma: 
   - `src`: contém o README.md, requirements.txt e o Dockerfile
   - `/app`: contém o arquivo principal do projeto, `main.py` e os arquivos das classes.
-- Decidi dessa forma em vez de utilizar uma arquitetura MVC, por exemplo, para facilitar o desenvolvimento e o entendimento do projeto, considerando que se trata de um código simples.
+- Decidi dessa forma para facilitar o desenvolvimento e o entendimento do projeto, considerando que se trata de um código simples.
 
 ### Possíveis melhorias
 
 - O principal ponto que eu não implementei, mas gostaria de ter, é a utilização de testes. Acabei não implementando por questão de tempo.
-- Ter um frontend conectado com esse backend deixaria muito mais intuitivo
+- Ter um frontend conectado com esse backend deixaria muito mais intuitivo.
 - Também seria interessante fazer deploy do projeto na nuvem.
+- Desacoplar algumas coisas de http de dentro do grafo e colocá-las no main.py, que é onde estão sendo definidas as rotas.
 
 ## Rodando o projeto
 

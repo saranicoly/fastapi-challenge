@@ -56,8 +56,8 @@ class Graph():
       "Luiza": 0,
     }
 
-  def show_graph(self):
-    # Shows the current state of the graph (all the people)
+  def show_nodes(self):
+    # Shows the nodes (all the people)
     adj_list = list(self.matriz_adj)
     return adj_list
   

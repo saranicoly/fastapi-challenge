@@ -56,7 +56,7 @@ class Graph():
       "Luiza": 0,
     }
 
-  def show_nodes(self):
+  def get_nodes(self):
     # Shows the nodes (all the people)
     adj_list = list(self.matriz_adj)
     return adj_list
@@ -71,7 +71,7 @@ class Graph():
       self.matriz_adj[friend][person.name] = 1
     return "Pessoa adicionada com sucesso"
   
-  def show_edges(self, name):
+  def get_edges(self, name):
     # Shows the edges(friends) of a person
     if name not in self.matriz_adj:
       raise HTTPException(status_code=404, detail=f"Person {name} not found")
@@ -80,3 +80,15 @@ class Graph():
       if self.matriz_adj[name][friend] == 1:
         edges.append(friend)
     return edges
+  
+  def get_second_degree_edges(self, name):
+    # Shows the second degree edges(friends of friends) of a person
+    if name not in self.matriz_adj:
+      raise HTTPException(status_code=404, detail=f"Person {name} not found")
+    edges = set(self.get_edges(name))
+    edges.add(name) # Adds the person to the list of edges, so it won't be added in the second degree friends
+    second_degree_edges = set()
+    for friend in edges:
+      temp = set(self.get_edges(friend))
+      second_degree_edges = second_degree_edges.union(temp.difference(edges))
+    return second_degree_edges

@@ -1,5 +1,5 @@
 import json
-
+from fastapi import HTTPException
 class Grafo():
   matriz_adj = dict()
 
@@ -64,8 +64,10 @@ class Grafo():
   
   def add_node(self, person):
     # Adds a new person(node) to the graph
-    self.matriz_adj[person.name] = {key: 0 for key in self.matriz_adj.keys()}
+    self.matriz_adj[person.name] = {}
     for friend in person.friends:
+      if friend not in self.matriz_adj:
+        raise HTTPException(status_code=400, detail=f"Friend {friend} not found")
       self.matriz_adj[person.name][friend] = 1
       self.matriz_adj[friend][person.name] = 1
-    return {"Nova pessoa adicionada com sucesso!"}
+    return "Pessoa adicionada com sucesso"

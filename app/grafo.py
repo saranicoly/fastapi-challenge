@@ -1,6 +1,5 @@
-import json
 from fastapi import HTTPException
-class Grafo():
+class Graph():
   matriz_adj = dict()
 
   def __init__(self):

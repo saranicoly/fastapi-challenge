@@ -59,15 +59,25 @@ class Grafo():
 
   def show_graph(self):
     # Shows the current state of the graph (all the people)
-    adj_list = list(self.matriz_adj.keys())
-    return json.dumps(adj_list, ensure_ascii=False).encode('utf8')
+    adj_list = list(self.matriz_adj)
+    return adj_list
   
   def add_node(self, person):
     # Adds a new person(node) to the graph
     self.matriz_adj[person.name] = {}
     for friend in person.friends:
       if friend not in self.matriz_adj:
-        raise HTTPException(status_code=400, detail=f"Friend {friend} not found")
+        raise HTTPException(status_code=404, detail=f"Friend {friend} not found")
       self.matriz_adj[person.name][friend] = 1
       self.matriz_adj[friend][person.name] = 1
     return "Pessoa adicionada com sucesso"
+  
+  def show_edges(self, name):
+    # Shows the edges(friends) of a person
+    if name not in self.matriz_adj:
+      raise HTTPException(status_code=404, detail=f"Person {name} not found")
+    edges = []
+    for friend in self.matriz_adj[name]:
+      if self.matriz_adj[name][friend] == 1:
+        edges.append(friend)
+    return edges
